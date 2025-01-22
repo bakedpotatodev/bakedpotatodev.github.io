@@ -21,9 +21,27 @@
             font-size: 3rem;
             color: #e74c3c;
         }
+        .hover-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease; /* Smooth transition for all changes */
+            }
+
+        .hover-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adding shadow on hover */
+            transform: translateY(-3px); /* Slight lift effect */
+        }
     </style>
 </head>
 <body>
     <h1>Website Not Up Yet</h1>
+    <a href="#" class="hover-button">Hover Over Me</a>
 </body>
 </html>
