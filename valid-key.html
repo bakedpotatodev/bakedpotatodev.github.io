@@ -50,14 +50,74 @@
     <p>Below you can access the exclusive video content:</p>
   </div>
 
-    <iframe 
-      class="video-iframe" 
-      src="https://player.vimeo.com/video/1063761267?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
-      title="Video Player" 
-      frameborder="0" 
-      allow="autoplay; fullscreen; picture-in-picture" 
-      allowfullscreen>
-    </iframe>
+    
+<div class="video-container">
+    <h2>Exclusive Video Content</h2>
+    <!-- Protected YouTube embed -->
+    <div id="player"></div>
+    
+    <script>
+      // Load the YouTube Player API
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      
+      // Create YouTube player after API loads
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '500',
+          width: '100%',
+          videoId: 'IKzXWAFyw5Q', // Replace with your YouTube video ID
+          playerVars: {
+            'controls': 1,         // Show controls
+            'rel': 0,              // Don't show related videos
+            'fs': 0,               // Disable fullscreen
+            'modestbranding': 1,   // Minimal YouTube branding
+            'disablekb': 1,        // Disable keyboard controls
+            'playsinline': 1,      // Play inline on mobile
+            'iv_load_policy': 3    // Hide annotations
+          },
+          events: {
+            'onReady': onPlayerReady
+          }
+        });
+      }
+      
+      function onPlayerReady(event) {
+        // Add additional protection against right-clicks
+        document.getElementById('player').addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+          return false;
+        });
+      }
+      
+      // Prevent various keyboard shortcuts
+      document.addEventListener('keydown', function(event) {
+        // Prevent common download shortcuts
+        if ((event.ctrlKey && event.key === 's') || // Ctrl+S
+            (event.ctrlKey && event.key === 'u') || // Ctrl+U
+            (event.key === 'F12')) {                // F12
+          event.preventDefault();
+          return false;
+        }
+      });
+    </script>
+  </div>
+  
+  <!-- CSS to add to your <style> section -->
+  <style>
+    /* Additional CSS to minimize download opportunities */
+    iframe {
+      pointer-events: initial !important; /* Allow interaction with the video */
+    }
+    
+    #player {
+      width: 100%;
+      height: 500px;
+    }
+  </style>
   </div>
 </body>
 </html>
