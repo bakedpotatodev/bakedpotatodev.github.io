@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Parameter Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      font-size: 18px;
+    }
+    .key-value {
+      font-weight: bold;
+      color: #0066cc;
+    }
+  </style>
+</head>
+<body>
+  <h1>This page is checking your key</h1>
+  
+  <div class="result">
+    The value after ?key= is: <span id="keyValue" class="key-value">Loading...</span>
+  </div>
+
+  <script>
+    // Function to get a specific query parameter value from the URL
+    function getQueryParam(paramName) {
+      // Get the current URL
+      const url = window.location.href;
+      
+      // Create a URL object
+      const urlObj = new URL(url);
+      
+      // Get the value of the specified parameter
+      const paramValue = urlObj.searchParams.get(paramName);
+      
+      // Log the parameter value to the console
+      console.log(`Value of ${paramName}: ${paramValue}`);
+      
+      // Return the parameter value
+      return paramValue;
+    }
+
+    // Get the key parameter and update the page
+    document.addEventListener('DOMContentLoaded', function() {
+      const keyValue = getQueryParam('key') || 'No key parameter found';
+      
+      // Update the span with the key value
+      document.getElementById('keyValue').textContent = keyValue;
+    });
+  </script>
+</body>
+</html>
